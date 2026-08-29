@@ -702,6 +702,12 @@ function renderQtyGrid(){
   const total = chapters.reduce((s, c) => s + c.questions.length, 0);
   const wrap = el('qty-grid');
   wrap.innerHTML = '';
+  
+  // Auto-select full session if nothing is selected yet
+  if(selectedQty === null){
+    selectedQty = total;
+  }
+  
   const counts = QTY_OPTIONS.filter(n => n < total);
   counts.forEach(n => {
     const b = document.createElement('button');
@@ -901,8 +907,8 @@ renderSourceFooter();
 // Set version and build date
 const versionEl = el('version-number');
 const dateEl = el('build-date');
-if(versionEl) versionEl.textContent = '1.23';
-if(dateEl) dateEl.textContent = '2026-08-29 10:15 AEST';
+if(versionEl) versionEl.textContent = '1.24';
+if(dateEl) dateEl.textContent = '2026-08-29 13:58 AEST';
 
 el('btn-select-all').addEventListener('click', () => {
   CHAPTERS.forEach(c => selectedChapterIds.add(c.id));
